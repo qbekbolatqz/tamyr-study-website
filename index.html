@@ -547,12 +547,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <div class="logo-mark">
-          <svg class="logo-svg" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 2L22 7.5V18.5L13 24L4 18.5V7.5L13 2Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
-            <path d="M13 6L19 9.5V16.5L13 20L7 16.5V9.5L13 6Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
-            <circle cx="13" cy="13" r="3" fill="rgba(232,168,76,0.8)"/>
-            <path d="M13 6V2M19 9.5L22 7.5M19 16.5L22 18.5M13 20V24M7 16.5L4 18.5M7 9.5L4 7.5" stroke="rgba(232,168,76,0.5)" stroke-width="0.8"/>
-          </svg>
+          <img src="assets/logo.png" alt="Tamyr" style="width:36px;height:36px;object-fit:contain;border-radius:8px;" />
         </div>
         <span class="logo-wordmark">Tamyr</span>
       </a>
@@ -638,29 +633,40 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
             <!-- Phone frame -->
             <div class="phone">
               <div class="phone-pill"></div>
+              <!-- App header -->
               <div class="ph-header">
-                <span class="ph-logo">TAMYR</span>
-                <span class="ph-xp">♦ 2710 XP</span>
+                <span class="ph-logo">Tamyr Study Қосымшасы</span>
+                <span class="ph-xp">⚡ 1</span>
               </div>
-              <div class="ph-progress">
-                <div class="ph-prog-label">
-                  <span>4 / 10 сұрақ</span>
-                  <span style="color:#FF6B35">🔥 3 streak</span>
+              <!-- Topic + progress -->
+              <div style="margin-bottom:10px">
+                <div style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">Батырлар</div>
+                <div class="ph-prog-track" style="margin-bottom:4px"><div class="ph-prog-fill" style="width:30%"></div></div>
+                <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted)">
+                  <span style="color:var(--purple-l)">━━━━</span><span>3/10</span>
                 </div>
-                <div class="ph-prog-track"><div class="ph-prog-fill"></div></div>
+                <div class="ph-prog-track" style="margin-top:4px"><div class="ph-prog-fill" style="width:13%;background:linear-gradient(90deg,#2FE6DE,#6B3FA0)"></div></div>
+                <div style="text-align:right;font-size:9px;color:var(--muted);margin-top:2px">13</div>
               </div>
+              <!-- Question -->
               <div class="ph-question">
-                Абай Құнанбайұлы өлеңдерін негізінен қандай тілде жазды?
+                Бөгенбай батыр қай жүзге жатады?
               </div>
+              <!-- Answers -->
               <div class="ph-answers">
-                <div class="ph-ans c">✓ Қазақ тілінде</div>
-                <div class="ph-ans w">✗ Орыс тілінде</div>
-                <div class="ph-ans" id="ans3">Парсы тілінде</div>
-                <div class="ph-ans" id="ans4">Шағатай тілінде</div>
+                <div class="ph-ans" style="color:var(--muted)">A &nbsp; Жүзге жатпайды</div>
+                <div class="ph-ans" style="color:var(--muted)">B &nbsp; Ұлы жүз</div>
+                <div class="ph-ans c">✓ &nbsp; Орта жүз</div>
+                <div class="ph-ans" id="ans4" style="color:var(--muted)">D &nbsp; Кіші жүз</div>
               </div>
-              <div class="ph-timer">
-                <div class="ph-dot"></div>
-                <span>12 секунд қалды</span>
+              <!-- Explanation -->
+              <div style="margin-top:10px;background:rgba(107,63,160,0.15);border-radius:10px;padding:9px 10px;font-size:9px;line-height:1.6;color:var(--muted)">
+                💡 Бөгенбай батыр — Орта жүздің Арғын тайпасынан шыққан аса батыр қолбасшы.<br/>
+                ⭐ Бөгенбай батыр Абылай ханның бас кеңесшісі болған.
+              </div>
+              <!-- Next button -->
+              <div style="margin-top:12px;background:linear-gradient(135deg,#6B3FA0,#8B5CF6);border-radius:100px;text-align:center;padding:9px;font-size:11px;font-weight:700;color:#fff;cursor:pointer">
+                Келесі →
               </div>
             </div>
           </div>
@@ -828,7 +834,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <div class="f-logo-mark">🐆</div>
+          <img src="assets/logo.png" alt="Tamyr" style="width:40px;height:40px;object-fit:contain;border-radius:10px;" />
           <span class="f-logo-text">Tamyr</span>
         </div>
         <p class="footer-tagline">Диаспора үшін жасалған<br/>қазақ мәдениеті quiz платформасы.</p>
