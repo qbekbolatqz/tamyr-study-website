@@ -50,6 +50,9 @@
     }
   </style>
 <style>
+/* ─── Force light color scheme — prevent system dark mode interference ─── */
+:root,[data-theme],*{color-scheme:only light}
+
 /* ─── Reset & Root ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -103,11 +106,11 @@ body{
   border-radius:var(--r);
 }
 .grad-text{
-  background:linear-gradient(135deg,var(--cream) 0%,var(--gold-l) 60%,var(--gold) 100%);
+  background:linear-gradient(135deg,#E8A84C,#F5F0E8);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .gold-text{
-  background:linear-gradient(135deg,#E8A84C,#F5CF7A,#C88A30);
+  background:linear-gradient(135deg,#E8A84C,#F5F0E8);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .section-tag{
@@ -517,17 +520,25 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 /* ─── TOPICS ─── */
 .topics{padding:100px 0}
 .topics-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:20px;
+}
+@media(max-width:768px){
+  .topics-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+}
+@media(max-width:400px){
+  .topics-grid{grid-template-columns:1fr}
 }
 .topic-card{
   padding:30px 26px;border-radius:22px;
   position:relative;overflow:hidden;cursor:pointer;
+  min-width:0; /* prevent card from overflowing grid cell */
   transition:transform 0.3s,box-shadow 0.3s;
 }
 .topic-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--tc)}
 .topic-card:hover{transform:translateY(-8px);box-shadow:0 24px 64px rgba(0,0,0,0.4),0 0 32px color-mix(in srgb,var(--tc) 20%,transparent)}
-.topic-icon{font-size:38px;display:block;margin-bottom:14px}
+.topic-icon{display:block;margin-bottom:14px;width:48px;height:48px;object-fit:contain;filter:none !important}
 .topic-name{font-family:'Druk Wide','DrukWide',system-ui,sans-serif;font-size:14px;font-weight:700;line-height:1.4;margin-bottom:8px}
 .topic-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px}
 .topic-footer{display:flex;align-items:center;justify-content:space-between}
@@ -576,7 +587,13 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 
 /* ─── FOOTER ─── */
 footer{border-top:1px solid var(--border);padding:56px 0 40px}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;width:100%}
+@media(max-width:768px){
+  .footer-grid{grid-template-columns:1fr;gap:24px;padding:0}
+  .footer-col,.footer-brand{width:100%;max-width:100%;overflow:visible}
+  footer{padding:40px 0 24px;overflow:hidden}
+  .footer-bottom{flex-direction:column;text-align:center;gap:8px;margin-top:28px}
+}
 .footer-brand{}
 .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .f-logo-mark{
@@ -620,7 +637,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <div class="logo-mark">
-          <img src="assets/logo.png" alt="Tamyr" style="width:36px;height:36px;object-fit:contain;border-radius:8px;" />
+          <img src="assets/logo.png" alt="Tamyr" style="width:36px;height:36px;object-fit:contain;border-radius:8px;filter:none !important;" />
         </div>
         <span class="logo-wordmark">Tamyr</span>
       </a>
@@ -636,7 +653,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
         Telegram-да ашу
       </a>
-      <button class="nav-hamburger" onclick="openMenu()">☰</button>
+      <button class="nav-hamburger" aria-label="Меню">☰</button>
     </div>
   </div>
 </nav>
@@ -787,7 +804,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
       </div>
     </div>
 
-    <p class="why-note fade-up">n=12 · 2025 · Қазақ диаспорасы сауалнамасы</p>
+    <p class="why-note fade-up">n=12 · 2026 · Қазақ диаспорасы сауалнамасы</p>
   </div>
 </section>
 
@@ -859,7 +876,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
     <div class="topics-grid">
 
       <div class="topic-card glass fade-up" style="--tc:#8B5CF6;transition-delay:.05s">
-        <span class="topic-icon">🏹</span>
+        <img class="topic-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f3f9.png" width="48" height="48" alt="🏹" />
         <div class="topic-name">Батырлар мен тарих</div>
         <div class="topic-desc">Қазақтың батырлары, ұлы тұлғалары мен тарихи оқиғалары</div>
         <div class="topic-footer">
@@ -869,7 +886,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
       </div>
 
       <div class="topic-card glass fade-up" style="--tc:#2A9D8F;transition-delay:.1s">
-        <span class="topic-icon">📖</span>
+        <img class="topic-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f4d6.png" width="48" height="48" alt="📖" />
         <div class="topic-name">Абай және әдебиет</div>
         <div class="topic-desc">Абай, Мұхтар Әуезов және қазақ классикасы</div>
         <div class="topic-footer">
@@ -879,7 +896,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
       </div>
 
       <div class="topic-card glass fade-up" style="--tc:#E76F51;transition-delay:.15s">
-        <span class="topic-icon">🎭</span>
+        <img class="topic-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f3ad.png" width="48" height="48" alt="🎭" />
         <div class="topic-name">Дәстүр мен салт</div>
         <div class="topic-desc">Үйлену тойлары, салт-дәстүрлер, ұлттық киімдер</div>
         <div class="topic-footer">
@@ -889,7 +906,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
       </div>
 
       <div class="topic-card glass fade-up" style="--tc:#E8A84C;transition-delay:.2s">
-        <span class="topic-icon">🎵</span>
+        <img class="topic-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f3b5.png" width="48" height="48" alt="🎵" />
         <div class="topic-name">Музыка мен өнер</div>
         <div class="topic-desc">Домбыра, Күй, ән-жыр, қазақтың музыкалық өнері</div>
         <div class="topic-footer">
@@ -899,7 +916,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
       </div>
 
       <div class="topic-card glass fade-up" style="--tc:#3D9BE9;transition-delay:.25s">
-        <span class="topic-icon">🗺️</span>
+        <img class="topic-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f5fa.png" width="48" height="48" alt="🗺️" />
         <div class="topic-name">География мен табиғат</div>
         <div class="topic-desc">Дала, таулар, өзендер, жануарлар дүниесі</div>
         <div class="topic-footer">
@@ -909,7 +926,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
       </div>
 
       <div class="topic-card glass fade-up" style="--tc:#F4A261;transition-delay:.3s">
-        <span class="topic-icon">🧠</span>
+        <img class="topic-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f9e0.png" width="48" height="48" alt="🧠" />
         <div class="topic-name">Тіл мен философия</div>
         <div class="topic-desc">Мақал-мәтелдер, тіл тарихы, ұлт даналығы</div>
         <div class="topic-footer">
@@ -972,7 +989,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Tamyr · Тамырыңды біл</span>
+      <span>© 2026 Tamyr · Тамырыңды біл</span>
       <span>Made with ♥ for the Kazakh diaspora</span>
     </div>
   </div>
@@ -985,9 +1002,14 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-// Mobile menu
-function openMenu() { document.getElementById('mob-menu').classList.add('open'); }
-function closeMenu() { document.getElementById('mob-menu').classList.remove('open'); }
+// Mobile menu — toggle on hamburger, close on X or link
+const mobMenu = document.getElementById('mob-menu');
+document.querySelector('.nav-hamburger').addEventListener('click', () => {
+  mobMenu.classList.toggle('open');
+});
+function closeMenu() { mobMenu.classList.remove('open'); }
+// close on backdrop tap
+mobMenu.addEventListener('click', (e) => { if(e.target === mobMenu) closeMenu(); });
 
 // Scroll reveal
 const observer = new IntersectionObserver((entries) => {
