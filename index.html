@@ -106,11 +106,11 @@ body{
   border-radius:var(--r);
 }
 .grad-text{
-  background:linear-gradient(135deg,#E8A84C,#F5F0E8);
+  background:linear-gradient(135deg,#E8A84C 0%,#F5F0E8 50%,#E8A84C 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .gold-text{
-  background:linear-gradient(135deg,#E8A84C,#F5F0E8);
+  background:linear-gradient(135deg,#E8A84C 0%,#F5F0E8 50%,#E8A84C 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .section-tag{
@@ -139,7 +139,7 @@ body{
 .why-stat-num{
   font-family:'Druk Wide','DrukWide',system-ui,sans-serif;
   font-size:clamp(48px,5vw,72px);font-weight:900;line-height:1;
-  background:linear-gradient(135deg,#E8A84C,#F5CF7A,#C88A30);
+  background:linear-gradient(135deg,#E8A84C 0%,#F5F0E8 50%,#E8A84C 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:14px;
 }
@@ -511,7 +511,7 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
   display:flex;align-items:center;justify-content:center;
   font-family:'Druk Wide','DrukWide',system-ui,sans-serif;font-size:13px;font-weight:800;color:var(--gold);
 }
-.step-icon{font-size:38px;margin-bottom:18px;display:block}
+.step-icon{display:block;margin:0 auto 18px;width:48px;height:48px;object-fit:contain;filter:none !important}
 .step-title{font-family:'Druk Wide','DrukWide',system-ui,sans-serif;font-size:15px;font-weight:700;margin-bottom:10px;line-height:1.4}
 .step-desc{font-size:13px;color:var(--muted);line-height:1.65}
 
@@ -636,9 +636,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <div class="logo-mark">
-          <img src="assets/logo.png" alt="Tamyr" style="width:36px;height:36px;object-fit:contain;border-radius:8px;filter:none !important;" />
-        </div>
+        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#6B3FA0,#2D1B69);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 0 20px rgba(107,63,160,0.5);">🐆</div>
         <span class="logo-wordmark">Tamyr</span>
       </a>
 
@@ -845,19 +843,19 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
     <div class="steps-row">
       <div class="step-card glass fade-up" style="transition-delay:.1s">
         <div class="step-num">01</div>
-        <span class="step-icon">📱</span>
+        <img class="step-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f4f1.png" width="48" height="48" alt="📱" />
         <h3 class="step-title">Telegram-ды аш</h3>
         <p class="step-desc">@tamyrstudybot іздеп тауып, «Ойынды бастау» батырмасын бас. Бір секундта дайын.</p>
       </div>
       <div class="step-card glass fade-up" style="transition-delay:.2s">
         <div class="step-num">02</div>
-        <span class="step-icon">🎯</span>
+        <img class="step-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f3af.png" width="48" height="48" alt="🎯" />
         <h3 class="step-title">Тақырып таңда</h3>
         <p class="step-desc">6 тақырып пакетінің бірін таңда — Тарих, Абай, Дәстүр, Музыка... Өзіңе жақыны бастауға болады.</p>
       </div>
       <div class="step-card glass fade-up" style="transition-delay:.3s">
         <div class="step-num">03</div>
-        <span class="step-icon">🏆</span>
+        <img class="step-icon" src="https://emoji.aranja.com/static/emoji-data/img-apple-160/1f3c6.png" width="48" height="48" alt="🏆" />
         <h3 class="step-title">XP жина, бәсекелес</h3>
         <p class="step-desc">Дұрыс жауапқа XP аласың, streak жинайсың. Достарыңмен рейтингте бәсекелес.</p>
       </div>
