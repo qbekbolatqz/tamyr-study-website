@@ -2,7 +2,7 @@
 <html lang="kk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Tamyr — Тамырыңды біл</title>
   <meta name="description" content="Қазақ мәдениетін ойын арқылы үйрен. Telegram Mini App." />
   <style>
@@ -68,13 +68,15 @@
   --blur:blur(24px);
   --r:20px;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{
   background:var(--bg);
   color:var(--cream);
   font-family:'Gilroy',system-ui,sans-serif;
+  font-size:clamp(14px,3vw,16px);
   overflow-x:hidden;
   min-height:100vh;
+  -webkit-text-size-adjust:100%;
 }
 
 /* ─── Background orbs ─── */
@@ -196,27 +198,34 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 .nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color 0.2s;letter-spacing:0.2px}
 .nav-links a:hover{color:var(--cream)}
 .btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
   background:linear-gradient(135deg,#E8A84C 0%,#C88A30 100%);
   color:#150900;font-weight:700;font-size:14px;
-  padding:11px 24px;border-radius:100px;border:none;cursor:pointer;
+  padding:11px 24px;min-height:48px;border-radius:100px;border:none;cursor:pointer;
   text-decoration:none;white-space:nowrap;
   transition:all 0.25s;
   box-shadow:0 4px 24px rgba(232,168,76,0.35);
 }
 .btn-primary:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 36px rgba(232,168,76,0.5)}
 .btn-ghost{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
   background:rgba(255,255,255,0.06);border:1px solid var(--border);
   color:var(--cream);font-weight:500;font-size:14px;
-  padding:11px 24px;border-radius:100px;cursor:pointer;
+  padding:11px 24px;min-height:48px;border-radius:100px;cursor:pointer;
   text-decoration:none;
   transition:all 0.25s;backdrop-filter:blur(8px);
 }
 .btn-ghost:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2)}
 .nav-hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--cream);font-size:24px;line-height:1}
 
-@media(max-width:900px){.nav-links{display:none}.nav-hamburger{display:block}}
+/* hide nav links + CTA on mobile, show hamburger */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-hamburger{display:block}
+}
+@media(max-width:600px){
+  nav .btn-primary{display:none} /* only hamburger on small screens */
+}
 
 /* Mobile menu */
 #mob-menu{
@@ -257,7 +266,7 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 }
 .hero-title{
   font-family:'Druk Wide','DrukWide',system-ui,sans-serif;
-  font-size:clamp(44px,6.5vw,88px);
+  font-size:clamp(36px,8vw,96px);
   font-weight:900;line-height:1.05;letter-spacing:-2px;
   margin-bottom:24px;
 }
@@ -362,40 +371,74 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 .fc-xp .fc-value{background:linear-gradient(135deg,#E8A84C,#F5CF7A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .fc-correct .fc-value{color:#4ADE80;font-size:13px}
 
-/* ── Tablet 768px ── */
+/* ── 1440px desktop: nothing to override, base styles apply ── */
+
+/* ── Tablet ≤960px: stack hero, shrink phone ── */
 @media(max-width:960px){
-  .hero-wrap{padding:110px 0 80px}
+  .hero-wrap{padding:110px 0 80px;min-height:auto}
   .hero-grid{grid-template-columns:1fr;text-align:center;gap:48px}
   .hero-sub{margin-left:auto;margin-right:auto}
   .hero-cta{justify-content:center}
   .hero-trust{margin:24px auto 0;justify-content:center}
   .hero-right{order:-1}
   .phone-scene{width:260px}
-  /* pull floating cards inward so they don't overflow the viewport */
-  .fc-streak{right:-20px;top:-10px}
-  .fc-xp{right:-24px;bottom:60px}
-  .fc-correct{left:-20px;bottom:130px}
+  .fc-streak{right:-16px;top:-10px}
+  .fc-xp{right:-20px;bottom:60px}
+  .fc-correct{left:-16px;bottom:130px}
 }
 
-/* ── Mobile 480px ── */
-@media(max-width:480px){
+/* ── Tablet ≤768px: hide phone mockup, 2-col topics ── */
+@media(max-width:768px){
+  .hero-right{display:none}           /* hide phone + floating cards entirely */
+  .hero-grid{gap:0}
+  .hero-wrap{padding:100px 0 60px;min-height:auto}
   .container{padding:0 20px}
-  .hero-wrap{padding:100px 0 60px}
-  .hero-title{font-size:clamp(32px,10vw,52px);letter-spacing:-1px}
-  .hero-sub{font-size:15px}
-  .btn-lg{font-size:14px !important;padding:12px 24px !important}
-  .phone-scene{width:220px}
-  /* hide floating cards on smallest screens to avoid layout chaos */
-  .float-card{display:none}
+  .stats{padding:0 0 60px}
+  .why{padding:60px 0}
+  .how{padding:60px 0}
+  .topics{padding:60px 0}
+  .topics-grid{grid-template-columns:1fr 1fr}
+  .section-title{letter-spacing:-0.5px}
+  .why-stats{grid-template-columns:1fr 1fr}
+  .why-quotes{grid-template-columns:1fr}
 }
 
-/* ── Tiny 375px ── */
+/* ── Mobile ≤430px: single col everything ── */
+@media(max-width:430px){
+  .container{padding:0 16px}
+  .hero-wrap{padding:88px 0 48px}
+  .hero-badge{font-size:11px;padding:6px 14px;max-width:100%;text-align:center}
+  .hero-title{letter-spacing:-1px}
+  .hero-sub{font-size:15px}
+  .hero-cta{flex-direction:column;width:100%;gap:12px}
+  .btn-lg{width:100%;justify-content:center;font-size:15px !important;padding:14px 20px !important}
+  .topics-grid{grid-template-columns:1fr}
+  .why-stats{grid-template-columns:1fr}
+  .steps-row{grid-template-columns:1fr}
+  .steps-row::before{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-item{padding:20px 14px}
+  .step-card{padding:24px 18px}
+  .topic-card{padding:22px 18px}
+  .why-stat-card{padding:24px 18px}
+  .quote-card{padding:24px 18px}
+  .cta-section{padding:48px 0 64px}
+  .cta-wrap{padding:36px 18px}
+  .btn-xl{width:100%;justify-content:center;font-size:15px !important;padding:14px 20px !important}
+  .cta-sub{font-size:14px}
+  footer{padding:36px 0 24px}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;text-align:center;gap:8px}
+  .section-center{margin-bottom:40px}
+}
+
+/* ── Tiny ≤375px: tighten further ── */
 @media(max-width:375px){
-  .hero-title{font-size:30px}
-  .hero-badge{font-size:11px;padding:6px 14px}
-  .btn-lg{width:100%;justify-content:center}
-  .hero-cta{flex-direction:column;width:100%}
-  .phone-scene{display:none}
+  .container{padding:0 14px}
+  .hero-title{letter-spacing:-0.5px}
+  .hero-badge{font-size:10px}
+  .why-stat-num{font-size:52px}
+  .section-tag{font-size:10px;letter-spacing:1px}
 }
 
 /* ─── STATS ─── */
@@ -426,8 +469,8 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 }
 .stat-desc{font-size:13px;color:var(--muted);font-weight:400;line-height:1.4}
 
+/* stats 2x2 handled in the consolidated mobile block above */
 @media(max-width:640px){
-  .stats-grid{grid-template-columns:1fr 1fr}
   .stat-item:nth-child(2){border-right:none}
   .stat-item:nth-child(3){border-right:1px solid var(--border)}
   .stat-item:nth-child(3),.stat-item:nth-child(4){border-top:1px solid var(--border)}
@@ -438,7 +481,7 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 .section-center{text-align:center;margin-bottom:64px}
 .section-title{
   font-family:'Druk Wide','DrukWide',system-ui,sans-serif;
-  font-size:clamp(28px,4vw,52px);font-weight:900;
+  font-size:clamp(28px,5vw,64px);font-weight:900;
   line-height:1.1;letter-spacing:-1px;margin-bottom:16px;
 }
 .section-sub{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7}
@@ -469,7 +512,7 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 .step-title{font-family:'Druk Wide','DrukWide',system-ui,sans-serif;font-size:15px;font-weight:700;margin-bottom:10px;line-height:1.4}
 .step-desc{font-size:13px;color:var(--muted);line-height:1.65}
 
-@media(max-width:640px){.steps-row{grid-template-columns:1fr}.steps-row::before{display:none}}
+/* steps single col handled in consolidated mobile block */
 
 /* ─── TOPICS ─── */
 .topics{padding:100px 0}
@@ -495,16 +538,7 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 }
 .topic-stars{display:flex;gap:3px;font-size:12px}
 
-@media(max-width:768px){
-  .topics-grid{grid-template-columns:1fr 1fr}
-  .topics{padding:60px 0}
-  .how{padding:60px 0}
-  .section-title{letter-spacing:-0.5px}
-}
-@media(max-width:480px){
-  .topics-grid{grid-template-columns:1fr}
-  .cta-section{padding:60px 0 80px}
-}
+/* topics / how / cta breakpoints consolidated above */
 
 /* ─── CTA ─── */
 .cta-section{padding:100px 0 120px}
@@ -538,7 +572,7 @@ nav.scrolled{background:rgba(19,13,34,0.92);padding:12px 0}
 .btn-xl{font-size:18px !important;padding:18px 48px !important;border-radius:100px !important}
 .cta-note{position:relative;z-index:2;margin-top:20px;font-size:13px;color:var(--muted)}
 
-@media(max-width:600px){.cta-wrap{padding:48px 28px}}
+/* cta padding handled in consolidated mobile block */
 
 /* ─── FOOTER ─── */
 footer{border-top:1px solid var(--border);padding:56px 0 40px}
@@ -568,17 +602,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 40px}
   font-size:13px;color:var(--muted);
 }
 
-@media(max-width:700px){
-  .footer-grid{grid-template-columns:1fr;gap:32px}
-  .footer-bottom{flex-direction:column;text-align:center}
-  footer{padding:40px 0 28px}
-}
-@media(max-width:480px){
-  .stat-item{padding:24px 16px}
-  .step-card{padding:28px 20px}
-  .cta-wrap{padding:40px 20px}
-  .btn-xl{font-size:15px !important;padding:14px 28px !important}
-}
+/* footer + misc padding handled in consolidated mobile block */
 </style>
 </head>
 <body>
